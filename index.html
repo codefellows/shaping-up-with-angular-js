@@ -6,10 +6,36 @@
   <body ng-controller="StoreController as store">
     <ul class="list-group">
       <li class="list-group-item" ng-repeat="product in store.product">
-        <h1>{{product.name}}</h1>
-        <h2>{{product.price}}</h2>
-        <p>{{product.description}}</p>
-        <button ng-show="store.product.canPurchase">Add to Cart</button>
+        <h1>
+          {{product.name}}
+          <em class="pull-right">{{product.price | currency}}</em>
+        </h1>
+        <img ng-src="{{product.images[0]}}">
+        <section ng-controller="PanelController as panel">
+          <ul class="nav nav-pills">
+            <li ng-class="{ active: panel.isSelected(1) }">
+              <a href="" ng-click="panel.selectTab(1)">Description</a>
+            </li>
+            <li ng-class="{ active: panel.isSelected(2) }">
+              <a href="" ng-click="panel.selectTab(2)">Specifications</a>
+            </li>
+            <li ng-class="{ active: panel.isSelected(3) }">
+              <a href="" ng-click="panel.selectTab(3)">Reviews</a>
+            </li>
+          </ul>
+          <div class="panel" ng-show="panel.isSelected(1)">
+            <h4>Description</h4>
+            <p>{{product.description}}</p>
+          </div>
+          <div class="panel" ng-show="panel.isSelected(2)">
+            <h4>Specifications</h4>
+            <blockquote>None yet</blockquote>
+          </div>
+          <div class="panel" ng-show="panel.isSelected(3)">
+            <h4>Reviews</h4>
+            <blockquote>None yet</blockquote>
+          </div>
+        </section>
       </li>
     </ul>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
