@@ -2,10 +2,11 @@
 <html ng-app="store">
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
   </head>
   <body ng-controller="StoreController as store">
     <ul class="list-group">
-      <li class="list-group-item" ng-repeat="product in store.product">
+      <li class="list-group-item col-xs-4" ng-repeat="product in store.product">
         <h1>
           {{product.name}}
           <em class="pull-right">{{product.price | currency}}</em>
@@ -33,7 +34,30 @@
           </div>
           <div class="panel" ng-show="panel.isSelected(3)">
             <h4>Reviews</h4>
-            <blockquote>None yet</blockquote>
+            <blockquote ng-repeat="review in product.reviews">
+              <b>Stars: {{review.stars}}</b>
+              {{review.body}}
+              <cite>by: {{review.author}}</cite>
+            </blockquote>
+            <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+              <blockquote>
+                <b>Stars: {{reviewCtrl.review.stars}}</b>
+                {{reviewCtrl.review.body}}
+                <cite>by: {{reviewCtrl.review.author}}</cite>
+              </blockquote>
+              <select ng-model="reviewCtrl.review.stars" class="form-control" required>
+                <option value="1">1 star</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+                <option value="5">5 stars</option>
+              </select>
+              <textarea class="form-control" cols="30" rows="5" ng-model="reviewCtrl.review.body" required></textarea>
+              <label for="email"></label>
+              <input type="email" class="form-control" name="email" ng-model="reviewCtrl.review.author" required />
+              <div> reviewForm is {{reviewForm.$valid}} </div>
+              <input type="submit" value="Submit">
+            <form>
           </div>
         </section>
       </li>

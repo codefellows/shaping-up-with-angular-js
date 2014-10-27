@@ -17,6 +17,15 @@
     };
   });
 
+  app.controller('ReviewController', function() {
+    this.review = {};
+
+    this.addReview = function(product) {
+      product.reviews.push(this.review);
+      this.review = {};
+    }
+  })
+
   var gems = [
     {
       name: 'Dodecahedron',
@@ -28,6 +37,18 @@
         "http://cl.zdn.io/UuWP/gem-05.gif",
         "http://cl.zdn.io/UuD4/gem-09.gif"
       ],
+      reviews: [
+        {
+          stars: 5,
+          body: "This one is really neat!",
+          author: "joe@mama.com"
+        },
+        {
+          stars: 3,
+          body: "I've had better",
+          author: "meh@sok.com"
+        }
+      ]
     },
     {
       name: 'Pentahedron',
