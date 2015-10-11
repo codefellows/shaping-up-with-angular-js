@@ -1,6 +1,6 @@
 (function(){
   var app = angular.module('store-products', [ ]);
-    app.controller('ReviewController', function() {
+  app.controller('ReviewController', function() {
     this.review = {};
 
     this.addReview = function(product) {
@@ -23,7 +23,10 @@
       controller: function() {
         this.tab = 1;
 
+        console.log('productPanel E controller', this);
         this.selectTab = function(setTab) {
+          console.log('selectTab method', this);
+
           this.tab = setTab;
         };
 
