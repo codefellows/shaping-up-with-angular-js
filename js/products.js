@@ -23,10 +23,7 @@
       controller: function() {
         this.tab = 1;
 
-        console.log('productPanel E controller', this);
         this.selectTab = function(setTab) {
-          console.log('selectTab method', this);
-
           this.tab = setTab;
         };
 
